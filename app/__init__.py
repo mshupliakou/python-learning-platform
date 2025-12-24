@@ -7,13 +7,14 @@ load_dotenv()
 
 db = SQLAlchemy()
 
+# app/__init__.py
+
 def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = 'super-secret-key'
 
     database_url = os.environ.get('DATABASE_URL')
-
     if database_url and database_url.startswith("postgres://"):
         database_url = database_url.replace("postgres://", "postgresql://", 1)
 
@@ -22,10 +23,11 @@ def create_app():
 
     db.init_app(app)
 
-    with app.app_context():
-        from . import routes
-        from . import models
+    from .routes import main
+    app.register_blueprint(main)
 
+    with app.app_context():
+        from . import models
         db.create_all()
 
     return app
