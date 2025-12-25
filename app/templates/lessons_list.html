@@ -61,7 +61,7 @@
     }
 
     .lesson-container {
-        max-width: 800px; 
+        max-width: 800px;
         margin: 0 auto;
         padding: 0 20px;
     }
@@ -141,6 +141,14 @@
         </div>
     {% endif %}
 
+{% if current_user.is_authenticated and current_user.role == 'admin' %}
+    <div class="text-center mb-4">
+        <a href="{{ url_for('main.create_lesson', module_id=module.id_module) }}" class="btn"
+           style="background-color: var(--accent); color: black; font-weight: bold; border-radius: 20px; padding: 10px 30px;">
+            + ADD NEW LESSON
+        </a>
+    </div>
+    {% endif %}
     <div class="text-center mt-5 mb-5">
         <a href="{{ url_for('main.modules') }}" style="color: var(--text-muted); text-decoration: none; border-bottom: 1px solid var(--text-muted); padding-bottom: 2px;">
             &larr; Back to Modules
