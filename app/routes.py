@@ -34,7 +34,7 @@ def login():
             return redirect(url_for('main.modules'))
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
-            return "Wrong username or password"
+            return render_template('login.html')
 
     return render_template('login.html')
 
@@ -135,3 +135,8 @@ def edit_module(module_id):
     db.session.commit()
 
     return redirect(url_for('main.modules'))
+
+@main.route('/module/<int:module_id>')
+def lessons_list(module_id):
+    module = Module.query.get_or_404(module_id)
+    return render_template('lessons_list.html', module=module)
