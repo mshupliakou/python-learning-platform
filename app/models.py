@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'users'
     __table_args__ = {'schema': 'pylearn'}
     id_user = db.Column(db.Integer, primary_key=True)
@@ -17,6 +17,9 @@ class User(db.Model):
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
+
+    def get_id(self):
+        return str(self.id_user)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
@@ -37,4 +40,4 @@ class Module(db.Model):
     image_path = db.Column(db.Text, default='default_course.jpg')
 
     def __repr__(self):
-        return f'<Course {self.title}>'
+        return f'<Course {self.name}>'
