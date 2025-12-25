@@ -147,15 +147,11 @@ def lessons_list(module_id):
 def create_lesson(module_id):
     if current_user.role != 'admin':
         return redirect(url_for('main.modules'))
-
     if request.method == 'POST':
-        name = request.form.get('name')
+        topic = request.form.get('name')
         content = request.form.get('content')
-
-        new_lesson = Lesson(name=name, content=content, module_id=module_id)
+        new_lesson = Lesson(topic=topic, content=content, module_id=module_id)
         db.session.add(new_lesson)
         db.session.commit()
-
-        return redirect(url_for('main.module_details', module_id=module_id))
-
+        return redirect(url_for('main.lessons_list', module_id=module_id))
     return render_template('create_lesson.html', module_id=module_id)
