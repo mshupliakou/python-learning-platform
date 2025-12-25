@@ -89,3 +89,14 @@ def create_module():
     db.session.commit()
 
     return redirect(url_for('main.modules'))
+
+@main.route('/delete_module', methods=['POST'])
+@login_required
+def delete_module():
+    if current_user.role != 'admin':
+        return redirect(url_for('main.modules'))
+    id_module = request.form.get('id')
+    db.session.delete(Module.query.filter_by(id=id_module).first())
+    db.session.commit()
+
+    return redirect(url_for('main.modules'))
