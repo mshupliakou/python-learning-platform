@@ -71,20 +71,21 @@ def create_module():
     if current_user.role != 'admin':
         return redirect(url_for('main.modules'))
 
-    if request.method == 'POST':
-        name = request.form.get('name')
-        description = request.form.get('description')
-        file = request.files.get('image')
-        image_path = 'default_course.jpg'
-        if file and file.filename:
-            filename = secure_filename(file.filename)
-            save_path = os.path.join('app', 'static', 'images', 'modules', filename)
-            file.save(save_path)
-            image_filename = filename
+    name = request.form.get('name')
+    description = request.form.get('description')
 
-        new_module = Module(name=name, description=description, image_path=image_path)
-        db.session.add(new_module)
-        db.session.commit()
+    file = request.files.get('image')
 
-        return redirect(url_for('main.modules'))
+    image_filename = 'default_course.jpg'
 
+    if file and file.filename:
+        filename = secure_filename(file.filename)
+        save_path = os.path.join('app', 'static', 'images', 'modules', filename)
+        file.save(save_path)
+        image_filename = filename
+    new_module = Module(name=name, description=description, image_path=image_filename)
+
+    db.session.add(new_module)
+    db.session.commit()
+
+    return redirect(url_for('main.modules'))
