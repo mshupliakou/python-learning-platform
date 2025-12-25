@@ -41,3 +41,6 @@ class Module(db.Model):
 
     def __repr__(self):
         return f'<Course {self.name}>'
+
+    def get_id(self):
+        return str(self.id_module)
