@@ -90,13 +90,48 @@ def create_module():
 
     return redirect(url_for('main.modules'))
 
-@main.route('/delete_module', methods=['POST'])
+@main.route('/delete_module/<int:module_id>', methods=['POST'])
 @login_required
-def delete_module():
+def delete_module(module_id):
     if current_user.role != 'admin':
         return redirect(url_for('main.modules'))
-    id_module = request.form.get('id')
-    db.session.delete(Module.query.filter_by(id=id_module).first())
+
+    module = Module.query.get_or_404(module_id)
+
+    if module.image_path and module.image_path != 'default_course.jpg':
+        file_path = os.path.join('app', 'static', 'images', 'modules', module.image_path)
+        if os.path.exists(file_path):
+            try:
+                os.remove(file_path)
+            except Exception as e:
+                print(f"Error deleting file: {e}")
+
+    db.session.delete(module)
+    db.session.commit()
+
+    return redirect(url_for('main.modules'))
+
+@main.route('/edit_module/<int:module_id>', methods=['POST'])
+@login_required
+def edit_module(module_id):
+    if current_user.role != 'admin':
+        return redirect(url_for('main.modules'))
+
+    module = Module.query.get_or_404(module_id)
+
+    name = request.form.get('name')
+    description = request.form.get('description')
+    file = request.files.get('image')
+
+    module.name=name
+    module.description=description
+
+    if file and file.filename:
+        filename = secure_filename(file.filename)
+        save_path = os.path.join('app', 'static', 'images', 'modules', filename)
+        file.save(save_path)
+        module.image_path = filename
+
     db.session.commit()
 
     return redirect(url_for('main.modules'))
