@@ -3,6 +3,7 @@ from . import db
 from flask_login import login_user, logout_user, login_required, current_user
 from .models import  User
 from .models import Module
+from .models import Lesson
 import os
 from werkzeug.utils import secure_filename
 
@@ -141,16 +142,20 @@ def lessons_list(module_id):
     module = Module.query.get_or_404(module_id)
     return render_template('lessons_list.html', module=module)
 
-@main.route('/create_lesson', methods=['POST'])
+@main.route('/create_lesson/<int:module_id>', methods=['GET', 'POST'])
 @login_required
-def create_lesson():
+def create_lesson(module_id):
     if current_user.role != 'admin':
-        return redirect(url_for('main.lessons_list'))
+        return redirect(url_for('main.modules'))
 
-    topic = request.form.get('topic')
-    description = request.form.get('description')
-    content = request.form.get('content')
+    if request.method == 'POST':
+        name = request.form.get('name')
+        content = request.form.get('content')
 
-    db.session.commit()
+        new_lesson = Lesson(name=name, content=content, module_id=module_id)
+        db.session.add(new_lesson)
+        db.session.commit()
 
-    return redirect(url_for('main.lessons_list'))
+        return redirect(url_for('main.module_details', module_id=module_id))
+
+    return render_template('create_lesson.html', module_id=module_id)
