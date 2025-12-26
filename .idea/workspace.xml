@@ -7,9 +7,9 @@
     <list default="true" id="e32ebeef-628b-4a76-8b71-da48666ab239" name="Changes" comment="update">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/create_lesson.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/create_lesson.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/lessons_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/lessons_list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,23 +139,7 @@
       <updated>1766596079945</updated>
       <workItem from="1766596081162" duration="17295000" />
       <workItem from="1766656104272" duration="28126000" />
-      <workItem from="1766751024409" duration="570000" />
-    </task>
-    <task id="LOCAL-00035" summary="update">
-      <option name="closed" value="true" />
-      <created>1766616259363</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1766616259363</updated>
-    </task>
-    <task id="LOCAL-00036" summary="buttons instead of links">
-      <option name="closed" value="true" />
-      <created>1766617208240</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1766617208240</updated>
+      <workItem from="1766751024409" duration="5592000" />
     </task>
     <task id="LOCAL-00037" summary="login import">
       <option name="closed" value="true" />
@@ -533,7 +517,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766693055269</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="update">
+      <option name="closed" value="true" />
+      <created>1766751627629</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1766751627630</updated>
+    </task>
+    <task id="LOCAL-00085" summary="update">
+      <option name="closed" value="true" />
+      <created>1766751641250</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1766751641250</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -579,6 +579,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PythonLearningPlatform$PythonLearningPlatform.coverage" NAME="PythonLearningPlatform Coverage Results" MODIFIED="1766695619947" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonLearningPlatform$PythonLearningPlatform.coverage" NAME="PythonLearningPlatform Coverage Results" MODIFIED="1766754543201" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
