@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ lesson.topic }} | PyLearn{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="mb-4">
+        <a href="{{ url_for('main.module_detail', id_module=lesson.module_id) }}" class="text-muted text-decoration-none">
+            &larr; Return to Module
+        </a>
+    </div>
+
+    <h1 class="mb-4" style="color: var(--accent);">{{ lesson.topic }}</h1>
+
+    <div class="lesson-content p-4" style="background-color: var(--bg-card); border-radius: 8px; border: 1px solid var(--border);">
+        <div style="color: var(--text-main); font-family: sans-serif; line-height: 1.6;">
+            {{ lesson.content | safe }}
+        </div>
+    </div>
+    
+    <div class="mt-5 d-flex justify-content-between">
+        </div>
+</div>
+
+{% endblock %}
