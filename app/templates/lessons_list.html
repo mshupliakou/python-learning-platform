@@ -210,7 +210,7 @@
             </div>
             {% endif %}
 
-            <a href="#" class="lesson-btn">
+            <a href="{{ url_for('main.view_lesson', id_lesson=lesson.id_lesson) }}" class="lesson-btn">
                 <span class="lesson-number">#{{ loop.index }}</span>
                 <span style="flex-grow: 1;">{{ lesson.topic }}</span>
 
