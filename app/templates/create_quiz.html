@@ -68,6 +68,12 @@
 </div>
 
 <script>
-src="scripts/quizes.js"
+    const CONFIG = {
+        saveUrl: "{{ url_for('main.save_quiz', id_lesson=lesson.id_lesson) }}",
+        redirectUrl: "{{ url_for('main.view_lesson', id_lesson=lesson.id_lesson) }}"
+    };
 </script>
+
+<script src="{{ url_for('static', filename='js/quizes.js') }}"></script>
+
 {% endblock %}
