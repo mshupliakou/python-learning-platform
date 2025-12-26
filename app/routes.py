@@ -169,3 +169,24 @@ def create_lesson(module_id):
         db.session.commit()
         return redirect(url_for('main.lessons_list', module_id=module_id))
     return render_template('create_lesson.html', module_id=module_id, api_key=tinymce_key)
+
+
+@main.route('/edit_lesson/<int:id_lesson>', methods=['GET', 'POST'])
+@login_required
+def edit_lesson(id_lesson):
+    if current_user.role != 'admin':
+        return redirect(url_for('main.index'))
+
+    tinymce_key = os.environ.get('TINYMCE_KEY')
+
+    lesson = Lesson.query.get_or_404(id_lesson)
+
+    if request.method == 'POST':
+        lesson.topic = request.form.get('name')
+        lesson.content = request.form.get('content')
+
+        db.session.commit()
+
+        return redirect(url_for('main.lessons_list', module_id=lesson.id_module))
+
+    return render_template('create_lesson.html', lesson=lesson, api_key=tinymce_key)
