@@ -61,3 +61,31 @@ class Lesson(db.Model):
 
     def get_id(self):
         return str(self.id_lesson)
+
+class Quiz(db.Model):
+    __tablename__ = 'quiz'
+    __table_args__ = {'schema': 'pylearn'}
+    id_quiz = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    id_lesson = db.Column(db.Integer)
+    submitted = db.Column(db.Boolean, default=False)
+
+class Question(db.Model):
+    __tablename__ = 'question'
+    __table_args__ = {'schema': 'pylearn'}
+    id_question = db.Column(db.Integer, primary_key=True)
+    question = db.Column(db.Text)
+    id_quiz = db.Column(db.Integer)
+
+class Answer(db.Model):
+    __tablename__ = 'answer'
+    __table_args__ = {'schema': 'pylearn'}
+    id_answer = db.Column(db.Integer, primary_key=True)
+    answer = db.Column(db.Text)
+    is_right = db.Column(db.Boolean, default=False)
+
+class User_Answer(db.Model):
+    __tablename__ = 'user_answer'
+    __table_args__ = {'schema': 'pylearn'}
+    id_answer = db.Column(db.Integer, primary_key=True)
+    id_user = db.Column(db.Integer, db.ForeignKey('users.id_user'))
