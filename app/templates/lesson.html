@@ -51,7 +51,45 @@
         </div>
 </div>
 
-    <button class="btn-get-started">+ Create Quiz for this lesson</button>
+<hr class="my-5" style="border-color: var(--border);">
+
+    <div class="quiz-section text-center">
+
+        {% if lesson.quiz %}
+            <div class="card p-4 mb-4" style="background-color: var(--bg-card); border: 1px solid var(--accent);">
+                <h3 style="color: var(--text-main);">Quiz: {{ lesson.quiz.title }}</h3>
+                <p class="text-muted">Test your knowledge based on this lesson.</p>
+
+                <a href="#" class="btn-get-started" style="text-decoration: none; display: inline-block;">START QUIZ</a>
+
+                {% if current_user.role == 'admin' %}
+                    <div class="mt-4 pt-3 border-top border-secondary d-flex justify-content-center gap-3">
+                        <a href="{{ url_for('main.create_quiz', id_lesson=lesson.id_lesson) }}" class="btn btn-outline-warning">
+                            EDIT QUIZ
+                        </a>
+
+                        <form action="{{ url_for('main.delete_quiz', id_quiz=lesson.quiz.id_quiz) }}" method="post" onsubmit="return confirm('Delete this quiz?');">
+                            <button type="submit" class="btn btn-outline-danger">DELETE QUIZ</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+
+        {% else %}
+            {% if current_user.role == 'admin' %}
+                <div class="admin-panel p-4 rounded" style="border: 2px dashed var(--text-muted);">
+                    <h4 class="text-muted mb-3">No quiz attached to this lesson.</h4>
+                    <a href="{{ url_for('main.create_quiz', id_lesson=lesson.id_lesson) }}" class="btn-get-started"
+                       style="background-color: var(--bg-card); color: var(--accent); border: 2px solid var(--accent);">
+                        + CREATE QUIZ
+                    </a>
+                </div>
+            {% endif %}
+
+        {% endif %}
+    </div>
+
+    <br><br>
 
 
 {% endblock %}
