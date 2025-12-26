@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e32ebeef-628b-4a76-8b71-da48666ab239" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/lesson.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/lesson.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,31 +136,7 @@
       <updated>1766596079945</updated>
       <workItem from="1766596081162" duration="17295000" />
       <workItem from="1766656104272" duration="28126000" />
-      <workItem from="1766751024409" duration="10386000" />
-    </task>
-    <task id="LOCAL-00054" summary="module get id method">
-      <option name="closed" value="true" />
-      <created>1766679607648</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1766679607648</updated>
-    </task>
-    <task id="LOCAL-00055" summary="delete module function">
-      <option name="closed" value="true" />
-      <created>1766679623166</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1766679623166</updated>
-    </task>
-    <task id="LOCAL-00056" summary="update">
-      <option name="closed" value="true" />
-      <created>1766679632609</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1766679632609</updated>
+      <workItem from="1766751024409" duration="13677000" />
     </task>
     <task id="LOCAL-00057" summary="update">
       <option name="closed" value="true" />
@@ -531,7 +506,31 @@
       <option name="project" value="LOCAL" />
       <updated>1766762387601</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="new styles and scripts were added">
+      <option name="closed" value="true" />
+      <created>1766763634384</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1766763634384</updated>
+    </task>
+    <task id="LOCAL-00104" summary="style was updated">
+      <option name="closed" value="true" />
+      <created>1766763661919</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1766763661919</updated>
+    </task>
+    <task id="LOCAL-00105" summary="update">
+      <option name="closed" value="true" />
+      <created>1766763669602</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1766763669602</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,8 +548,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="module get id method" />
-    <MESSAGE value="delete module function" />
     <MESSAGE value="misc.xml" />
     <MESSAGE value="edit function" />
     <MESSAGE value="edit button" />
@@ -573,10 +570,12 @@
     <MESSAGE value="created url" />
     <MESSAGE value="was deleted" />
     <MESSAGE value="view lesson function" />
+    <MESSAGE value="new styles and scripts were added" />
+    <MESSAGE value="style was updated" />
     <MESSAGE value="update" />
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PythonLearningPlatform$PythonLearningPlatform.coverage" NAME="PythonLearningPlatform Coverage Results" MODIFIED="1766763253082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonLearningPlatform$PythonLearningPlatform.coverage" NAME="PythonLearningPlatform Coverage Results" MODIFIED="1766763920791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
