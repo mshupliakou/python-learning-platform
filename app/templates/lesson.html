@@ -6,7 +6,7 @@
 
 <div class="container mt-5">
     <div class="mb-4">
-        <a href="{{ url_for('main.module_detail', id_module=lesson.module_id) }}" class="text-muted text-decoration-none">
+        <a href="{{ url_for('main.lessons_list', module_id=lesson.id_module) }}" class="text-muted text-decoration-none">
             &larr; Return to Module
         </a>
     </div>
@@ -14,9 +14,32 @@
     <h1 class="mb-4" style="color: var(--accent);">{{ lesson.topic }}</h1>
 
     <div class="lesson-content p-4" style="background-color: var(--bg-card); border-radius: 8px; border: 1px solid var(--border);">
-        <div style="color: var(--text-main); font-family: sans-serif; line-height: 1.6;">
+        <div class="lesson-text" style="
+            color: var(--text-main);
+            font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+            font-size: 1.15rem;
+            line-height: 1.7;">
+
             {{ lesson.content | safe }}
+
         </div>
+
+        <style>
+            .lesson-text img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                margin: 20px 0;
+            }
+
+            .lesson-text pre {
+                font-size: 1rem;
+                background: #1e1e1e;
+                padding: 15px;
+                border-radius: 6px;
+                border: 1px solid #333;
+            }
+        </style>
     </div>
     
     <div class="mt-5 d-flex justify-content-between">
