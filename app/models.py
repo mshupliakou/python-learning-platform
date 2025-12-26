@@ -52,8 +52,6 @@ class Lesson(db.Model):
 
     topic = db.Column(db.String(50))
 
-    description = db.Column(db.Text)
-
     content = db.Column(db.Text)
 
     id_module = db.Column(db.Integer)
