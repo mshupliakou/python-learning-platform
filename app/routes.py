@@ -190,3 +190,10 @@ def edit_lesson(id_lesson):
         return redirect(url_for('main.lessons_list', module_id=lesson.id_module))
 
     return render_template('create_lesson.html', lesson=lesson, api_key=tinymce_key)
+
+
+@main.route('/lesson/<int:id_lesson>')
+def view_lesson(id_lesson):
+    lesson = Lesson.query.get_or_404(id_lesson)
+    module = lesson.module
+    return render_template('lesson.html', lesson=lesson, module=module)
