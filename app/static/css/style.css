@@ -395,11 +395,10 @@ input[type="file"]::file-selector-button:hover {
     transform: translate(-2px, -2px);
 }
 
-/* В конец файла style.css */
 
 .error-message {
-    color: var(--accent); /* Красный цвет (#ff5e5b) */
-    background-color: rgba(255, 94, 91, 0.1); /* Легкий красноватый фон */
+    color: var(--accent);
+    background-color: rgba(255, 94, 91, 0.1);
     border: 1px solid var(--accent);
     padding: 10px;
     margin-bottom: 20px;

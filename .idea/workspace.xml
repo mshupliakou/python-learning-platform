@@ -8,6 +8,7 @@
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/create_lesson.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/create_lesson.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,6 +52,10 @@
     &quot;accountId&quot;: &quot;d4b8fdd3-fad9-4bd8-b0cd-94886aae6e93&quot;
   }
 }</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
@@ -65,6 +70,7 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "Flask server.PythonLearningPlatform.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -132,23 +138,8 @@
       <option name="presentableId" value="Default" />
       <updated>1766596079945</updated>
       <workItem from="1766596081162" duration="17295000" />
-      <workItem from="1766656104272" duration="25948000" />
-    </task>
-    <task id="LOCAL-00033" summary="return index">
-      <option name="closed" value="true" />
-      <created>1766616240528</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1766616240528</updated>
-    </task>
-    <task id="LOCAL-00034" summary="update">
-      <option name="closed" value="true" />
-      <created>1766616253674</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1766616253674</updated>
+      <workItem from="1766656104272" duration="28126000" />
+      <workItem from="1766751024409" duration="570000" />
     </task>
     <task id="LOCAL-00035" summary="update">
       <option name="closed" value="true" />
@@ -526,7 +517,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766692493967</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="update">
+      <option name="closed" value="true" />
+      <created>1766693046746</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1766693046746</updated>
+    </task>
+    <task id="LOCAL-00083" summary="update">
+      <option name="closed" value="true" />
+      <created>1766693055269</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1766693055269</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -572,6 +579,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PythonLearningPlatform$PythonLearningPlatform.coverage" NAME="PythonLearningPlatform Coverage Results" MODIFIED="1766692624083" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonLearningPlatform$PythonLearningPlatform.coverage" NAME="PythonLearningPlatform Coverage Results" MODIFIED="1766695619947" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

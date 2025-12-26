@@ -151,7 +151,7 @@ def create_lesson(module_id):
     if request.method == 'POST':
         topic = request.form.get('name')
         content = request.form.get('content')
-        new_lesson = Lesson(topic=topic, content=content, module_id=module_id)
+        new_lesson = Lesson(topic=topic, content=content, id_module=module_id)
         db.session.add(new_lesson)
         db.session.commit()
         return redirect(url_for('main.lessons_list', module_id=module_id))
