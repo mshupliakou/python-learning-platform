@@ -195,5 +195,6 @@ def edit_lesson(id_lesson):
 @main.route('/lesson/<int:id_lesson>')
 def view_lesson(id_lesson):
     lesson = Lesson.query.get_or_404(id_lesson)
-    module = lesson.module
+    id_module = lesson.id_module
+    module = Module.query.get_or_404(id_module)
     return render_template('lesson.html', lesson=lesson, module=module)
