@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}{{ quiz.title }} | PyLearn{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5" style="max-width: 800px;">
+
+    <div class="text-center mb-5">
+        <h1 style="color: var(--accent); font-weight: bold; letter-spacing: 2px;">{{ quiz.title }}</h1>
+        <p class="text-muted">Test your knowledge.</p>
+    </div>
+
+    <form method="post">
+
+        {% for q in quiz.questions %}
+        <div class="card mb-4 p-4" style="background-color: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--accent);">
+
+            <div class="mb-3" style="font-size: 1.15rem; color: #fff; font-family: 'Consolas', monospace;">
+                <span class="text-muted fw-bold me-2">Q{{ loop.index }}:</span>
+                {{ q.question | safe }}
+            </div>
+
+            <div class="options-list ms-3">
+                {% for a in q.answers %}
+                <div class="form-check mb-2 p-3 rounded"
+                     style="background-color: rgba(255,255,255,0.02); border: 1px solid #333; transition: all 0.2s;">
+
+                    <input class="form-check-input" type="radio"
+                           name="question_{{ q.id_question }}"
+                           id="ans_{{ a.id_answer }}"
+                           value="{{ a.id_answer }}" required>
+
+                    <label class="form-check-label w-100" for="ans_{{ a.id_answer }}"
+                           style="color: var(--text-main); cursor: pointer; font-family: sans-serif;">
+                        {{ a.answer }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="text-center mt-5">
+            <button type="submit" class="btn-get-started"
+                    style="background-color: var(--accent); color: black; font-weight: bold; border-radius: 20px; padding: 12px 50px; border: none; font-size: 1.2rem;">
+                SUBMIT ANSWERS
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<style>
+    .form-check:hover {
+        border-color: var(--accent) !important;
+    }
+    .form-check-input:checked + label {
+        color: var(--accent) !important;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
