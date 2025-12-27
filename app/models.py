@@ -48,11 +48,7 @@ class Lesson(db.Model):
     id_lesson = db.Column(db.Integer, primary_key=True)
     topic = db.Column(db.String(50))
     content = db.Column(db.Text)
-
-    # Исправлено: Добавлен ForeignKey
     id_module = db.Column(db.Integer, db.ForeignKey('pylearn.modules.id_module'))
-
-    # Связь
     quiz = db.relationship('Quiz', uselist=False, back_populates='lesson', cascade="all, delete-orphan")
 
     def __repr__(self):
@@ -91,5 +87,6 @@ class Answer(db.Model):
 class User_Answer(db.Model):
     __tablename__ = 'user_answer'
     __table_args__ = {'schema': 'pylearn'}
-    id_answer = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     id_user = db.Column(db.Integer, db.ForeignKey('pylearn.users.id_user'))
+    id_answer = db.Column(db.Integer, db.ForeignKey('pylearn.answer.id_answer'))
