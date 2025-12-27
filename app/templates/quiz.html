@@ -4,6 +4,76 @@
 
 {% block content %}
 
+<style>
+    .answer-option {
+        background-color: rgba(255, 255, 255, 0.02);
+        border: 1px solid #333;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .answer-option:hover {
+        border-color: rgba(var(--accent-rgb), 0.5);
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .custom-radio-input {
+        appearance: none;
+        -webkit-appearance: none;
+        margin: 0;
+        width: 0;
+        height: 0;
+        opacity: 0;
+        position: absolute;
+    }
+
+    .custom-radio-circle {
+        width: 22px;
+        height: 22px;
+        border: 2px solid var(--accent);
+        border-radius: 50%;
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.2s;
+        background: transparent;
+    }
+
+    .custom-radio-circle::after {
+        content: '';
+        width: 12px;
+        height: 12px;
+        background-color: var(--accent);
+        border-radius: 50%;
+        transform: scale(0);
+        transition: transform 0.2s ease;
+    }
+
+    .custom-radio-input:checked + .custom-radio-circle::after {
+        transform: scale(1);
+    }
+
+    .answer-option.selected {
+        border-color: var(--accent) !important;
+        background-color: rgba(var(--accent-rgb), 0.05) !important;
+    }
+
+    .answer-text {
+        color: var(--text-main);
+        font-size: 1rem;
+        user-select: none;
+    }
+
+    .answer-option.disabled {
+        opacity: 0.7;
+        pointer-events: none;
+    }
+</style>
+
 <div class="container mt-5 mb-5" style="max-width: 800px;">
 
     <div class="text-center mb-5">
@@ -11,53 +81,137 @@
         <p class="text-muted">Test your knowledge.</p>
     </div>
 
-    <form method="post">
-
+    <div id="quiz-form">
         {% for q in quiz.questions %}
-        <div class="card mb-4 p-4" style="background-color: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--accent);">
+        <div class="card mb-4 p-4 question-card" style="background-color: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--accent);">
 
-            <div class="mb-3" style="font-size: 1.15rem; color: #fff; font-family: 'Consolas', monospace;">
+            <div class="mb-3" style="font-size: 1.15rem; color: #fff;">
                 <span class="text-muted fw-bold me-2">Q{{ loop.index }}:</span>
                 {{ q.question | safe }}
             </div>
 
             <div class="options-list ms-3">
                 {% for a in q.answers %}
-                <div class="form-check mb-2 p-3 rounded"
-                     style="background-color: rgba(255,255,255,0.02); border: 1px solid #333; transition: all 0.2s;">
+                {% set is_selected = a.id_answer in user_answers_ids %}
 
-                    <input class="form-check-input" type="radio"
+                <label class="p-3 rounded answer-option {% if is_selected %}selected{% endif %} {% if already_taken %}disabled{% endif %}"
+                       for="ans_{{ a.id_answer }}">
+
+                    <input class="custom-radio-input" type="radio"
                            name="question_{{ q.id_question }}"
+                           value="{{ a.id_answer }}"
                            id="ans_{{ a.id_answer }}"
-                           value="{{ a.id_answer }}" required>
+                           {% if is_selected %}checked{% endif %}
+                           {% if already_taken %}disabled{% endif %}>
 
-                    <label class="form-check-label w-100" for="ans_{{ a.id_answer }}"
-                           style="color: var(--text-main); cursor: pointer; font-family: sans-serif;">
+                    <span class="custom-radio-circle"></span>
+
+                    <span class="answer-text" {% if is_selected %}style="color: var(--accent); font-weight: bold;"{% endif %}>
                         {{ a.answer }}
-                    </label>
-                </div>
+                    </span>
+                </label>
                 {% endfor %}
             </div>
         </div>
         {% endfor %}
 
-        <div class="text-center mt-5">
-            <button type="submit" class="btn-get-started"
-                    style="background-color: var(--accent); color: black; font-weight: bold; border-radius: 20px; padding: 12px 50px; border: none; font-size: 1.2rem;">
+        {% if not already_taken %}
+        <div class="text-center mt-5 mb-5" id="submit-btn-container">
+            <button onclick="submitQuiz()" class="btn-get-started"
+                    style="background-color: var(--accent); color: black; font-weight: bold; border-radius: 20px; padding: 12px 50px; border: none; font-size: 1.2rem; cursor: pointer;">
                 SUBMIT ANSWERS
             </button>
         </div>
+        {% endif %}
 
-    </form>
+        <div id="result-box" class="alert mt-4 text-center"
+             style="background: rgba(var(--accent-rgb), 0.1); border: 1px solid var(--accent); color: #fff; {% if not already_taken %}display: none;{% endif %}">
+            <h2 class="mb-4">Result: <span id="score-percent" style="color: var(--accent); font-weight: bold;">{{ percentage }}%</span></h2>
+
+            <a href="{{ url_for('main.view_lesson', id_lesson=quiz.id_lesson) }}"
+               class="btn-get-started"
+               style="background-color: var(--accent); color: black; font-weight: bold; border-radius: 20px; padding: 10px 30px; text-decoration: none; display: inline-block;">
+                &larr; BACK TO LESSON
+            </a>
+        </div>
+
+    </div>
 </div>
 
-<style>
-    .form-check:hover {
-        border-color: var(--accent) !important;
+<script>
+    async function submitQuiz() {
+        const answers = {};
+        const questions = document.querySelectorAll('.question-card');
+        let allAnswered = true;
+
+        questions.forEach(card => {
+            const checked = card.querySelector('input[type="radio"]:checked');
+            if (checked) {
+                const qId = checked.name.replace('question_', '');
+                answers[qId] = checked.value;
+            } else {
+                allAnswered = false;
+            }
+        });
+
+        if (!allAnswered) {
+            alert("Please answer all questions before submitting.");
+            return;
+        }
+
+        if (!confirm("Are you sure? You cannot retake this quiz.")) {
+            return;
+        }
+
+        try {
+            const response = await fetch("{{ url_for('main.quiz', id_quiz=quiz.id_quiz) }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ answers: answers })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                document.getElementById('score-percent').innerText = result.percentage + '%';
+                document.getElementById('result-box').style.display = 'block';
+
+                const submitBtn = document.getElementById('submit-btn-container');
+                if (submitBtn) submitBtn.style.display = 'none';
+
+                const inputs = document.querySelectorAll('input[type="radio"]');
+                inputs.forEach(input => input.disabled = true);
+
+                document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
+
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Network error.");
+        }
     }
-    .form-check-input:checked + label {
-        color: var(--accent) !important;
-        font-weight: bold;
-    }
-</style>
+
+    document.querySelectorAll('.answer-option').forEach(label => {
+        label.addEventListener('click', function(e) {
+            const radio = this.querySelector('input[type="radio"]');
+            if (radio.disabled) return;
+
+            const allInGroup = this.closest('.options-list').querySelectorAll('.answer-option');
+            allInGroup.forEach(opt => {
+                opt.classList.remove('selected');
+                opt.querySelector('.answer-text').style.color = 'var(--text-main)';
+                opt.querySelector('.answer-text').style.fontWeight = 'normal';
+            });
+
+            this.classList.add('selected');
+            this.querySelector('.answer-text').style.color = 'var(--accent)';
+            this.querySelector('.answer-text').style.fontWeight = 'bold';
+        });
+    });
+</script>
+
 {% endblock %}
