@@ -81,9 +81,12 @@
         <p class="text-muted">Test your knowledge.</p>
     </div>
 
-    <div id="quiz-form">
+    <div id="quiz-form" role="form">
         {% for q in quiz.questions %}
-        <div class="card mb-4 p-4 question-card" style="background-color: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--accent);">
+
+        <fieldset class="card mb-4 p-4 question-card" style="background-color: var(--bg-card); border: 1px solid var(--border); border-left: 5px solid var(--accent);">
+
+            <legend class="visually-hidden">Question {{ loop.index }}</legend>
 
             <div class="mb-3" style="font-size: 1.15rem; color: #fff;">
                 <span class="text-muted fw-bold me-2">Q{{ loop.index }}:</span>
@@ -104,7 +107,7 @@
                            {% if is_selected %}checked{% endif %}
                            {% if already_taken %}disabled{% endif %}>
 
-                    <span class="custom-radio-circle"></span>
+                    <span class="custom-radio-circle" aria-hidden="true"></span>
 
                     <span class="answer-text" {% if is_selected %}style="color: var(--accent); font-weight: bold;"{% endif %}>
                         {{ a.answer }}
@@ -112,19 +115,19 @@
                 </label>
                 {% endfor %}
             </div>
-        </div>
+        </fieldset>
         {% endfor %}
 
         {% if not already_taken %}
         <div class="text-center mt-5 mb-5" id="submit-btn-container">
-            <button onclick="submitQuiz()" class="btn-get-started"
+            <button type="button" onclick="submitQuiz()" class="btn-get-started"
                     style="background-color: var(--accent); color: black; font-weight: bold; border-radius: 20px; padding: 12px 50px; border: none; font-size: 1.2rem; cursor: pointer;">
                 SUBMIT ANSWERS
             </button>
         </div>
         {% endif %}
 
-        <div id="result-box" class="alert mt-4 text-center"
+        <div id="result-box" class="alert mt-4 text-center" role="alert"
              style="background: rgba(var(--accent-rgb), 0.1); border: 1px solid var(--accent); color: #fff; {% if not already_taken %}display: none;{% endif %}">
             <h2 class="mb-4">Result: <span id="score-percent" style="color: var(--accent); font-weight: bold;">{{ percentage }}%</span></h2>
 
@@ -197,8 +200,14 @@
 
     document.querySelectorAll('.answer-option').forEach(label => {
         label.addEventListener('click', function(e) {
+            // Zapobiega podwójnemu wyzwoleniu zdarzenia, jeśli kliknięto bezpośrednio w input
+            if (e.target.tagName === 'INPUT') return;
+
             const radio = this.querySelector('input[type="radio"]');
             if (radio.disabled) return;
+
+            // Manualnie zaznacz radio, jeśli kliknięto w div (label)
+            radio.checked = true;
 
             const allInGroup = this.closest('.options-list').querySelectorAll('.answer-option');
             allInGroup.forEach(opt => {
@@ -210,6 +219,24 @@
             this.classList.add('selected');
             this.querySelector('.answer-text').style.color = 'var(--accent)';
             this.querySelector('.answer-text').style.fontWeight = 'bold';
+        });
+    });
+
+    // Obsługa zmiany stanu inputa (dla klawiatury i kliknięć bezpośrednich)
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+             const label = this.closest('.answer-option');
+             const allInGroup = label.closest('.options-list').querySelectorAll('.answer-option');
+
+             allInGroup.forEach(opt => {
+                opt.classList.remove('selected');
+                opt.querySelector('.answer-text').style.color = 'var(--text-main)';
+                opt.querySelector('.answer-text').style.fontWeight = 'normal';
+            });
+
+            label.classList.add('selected');
+            label.querySelector('.answer-text').style.color = 'var(--accent)';
+            label.querySelector('.answer-text').style.fontWeight = 'bold';
         });
     });
 </script>

@@ -3,34 +3,47 @@
 {% block title %}Register | PyLearn{% endblock %}
 
 {% block content %}
-<div class="login-container">
+<div class="page-wrapper">
+    <div class="login-container">
 
-  <h1>REGISTER</h1>
+      <h1>REGISTER</h1>
 
-  <form method="post">
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              {% for message in messages %}
+                  <div class="error-message" role="alert">
+                      {{ message }}
+                  </div>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
 
-    <div class="input-group">
-      <label for="username">USERNAME</label>
-      <input type="text" id="username" name="username" required placeholder="username">
+      <form method="post" action="{{ url_for('main.register') }}">
+
+        <div class="input-group">
+          <label for="username">USERNAME</label>
+          <input type="text" id="username" name="username" required placeholder="Choose a username">
+        </div>
+
+        <div class="input-group">
+          <label for="email">EMAIL</label>
+          <input type="email" id="email" name="email" required placeholder="email@example.com">
+        </div>
+
+        <div class="input-group">
+          <label for="password">PASSWORD</label>
+          <input type="password" id="password" name="password" required placeholder="Choose a password">
+        </div>
+
+        <button type="submit">SIGN UP</button>
+      </form>
+
+      <div class="divider">OR</div>
+
+      <div class="footer">
+        Already have an account? <a href="{{ url_for('main.login') }}">Log in</a>
+      </div>
+
     </div>
-    <div class="input-group">
-      <label for="email">EMAIL</label>
-      <input type="email" id="email" name="email" required placeholder="email@example.com">
-    </div>
-
-    <div class="input-group">
-      <label for="password">PASSWORD</label>
-      <input type="password" id="password" name="password" required>
-    </div>
-
-    <button type="submit">SIGN UP</button>
-  </form>
-
-  <div class="divider">OR</div>
-
-  <div class="footer">
-    Already have an account? <a href="/login">Log in</a>
-  </div>
-
 </div>
 {% endblock %}
